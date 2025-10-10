@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HUSKY AI — your campus assistant</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <meta name="description" content="HUSKY AI helps Northeastern students with advising, the academic calendar, Husky Card, billing, IT help, and more — with links to official NU pages." />
+  </head>
+  <!-- ====================== Anurag's Part: Navbar + Offcanvas + Carousel Indicators ====================== -->
+
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top border-bottom">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">
+          <i class="bi bi-robot me-1"></i> HUSKY AI
+          <span class="badge badge-beta ms-2">Beta</span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNav"
+          aria-controls="offcanvasNav"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#features">What it can do</a></li>
+            <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+            <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavLabel">
+          <i class="bi bi-robot me-1"></i> HUSKY AI <span class="badge badge-beta ms-2">Beta</span>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="list-group list-group-flush">
+          <a href="#hero" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">Home</a>
+          <a href="#about" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">About</a>
+          <a href="#features" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">What it can do</a>
+          <a href="#faq" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas">FAQ</a>
+          <a href="login.html" class="list-group-item list-group-item-action">Login</a>
+        </div>
+      </div>
+    </div>
+
+    <section id="hero" class="hero-husky py-5">
+      <div class="container">
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>
+  </body>
+</html>
