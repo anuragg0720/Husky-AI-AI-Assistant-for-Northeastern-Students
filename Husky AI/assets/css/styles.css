@@ -149,4 +149,63 @@ footer .text-secondary { color: var(--muted) !important; }
   :root { --hero-height: 340px; }
 }
 
+/* ============================= Ananya: LOGIN PAGE STYLES ============================= */
+.login-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 0;
+  background:
+    radial-gradient(900px 500px at 10% 10%, rgba(204,0,0,0.25), transparent 60%),
+    linear-gradient(135deg, #000 0%, #4d0000 45%, #7a0000 100%);
+}
+
+.form-signin {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;          
+  justify-content: center;      
+  padding: 1rem;
+}
+
+.form-signin .card {
+  width: min(980px, 95vw);
+  margin: 0 auto;
+}
+
+
+.login-footer {
+  flex: 0 0 auto;
+  background: #000;
+  color: #e2e8f0;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.login-footer .text-secondary { color: #cbd5e1 !important; }
+
+.login-aside {
+  position: relative;
+  min-height: 260px;
+  background-image:
+    linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
+    var(--login-aside-image, url('../img/huskyportrait.webp')); 
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+.login-aside .aside-content { position: relative; z-index: 1; }
+.login-aside .text-aside { color: #e5e7eb; }
+.login-aside .list-aside .list-group-item {
+  background: rgba(255,255,255,.10);
+  color: #fff;
+  border-color: rgba(255,255,255,.18);
+}
+.login-aside .list-aside .bi-check-circle { color: #86efac; }
+
+@media (max-width: 575.98px) {
+  .login-aside { min-height: 200px; }
+}
+
+
 
