@@ -1,4 +1,25 @@
+/* ============================= DEEPA: GLOBAL STYLES & VARIABLES ============================= */
 
+html { scroll-behavior: smooth; }
+
+:root {
+  --brand-red: #cc0000;
+  --brand-red-600: #a30000;
+  --ink: #f1f5f9;
+  --muted: #cbd5e1;
+
+  --hero-height: clamp(360px, 45vh, 460px);
+}
+
+body {
+  background:
+    radial-gradient(900px 500px at 10% 10%, rgba(204,0,0,0.25), transparent 60%),
+    linear-gradient(135deg, #000000 0%, #4d0000 45%, #7a0000 100%);
+  color: var(--ink);
+}
+
+.section       { padding: 3.5rem 0; }
+.section-muted { background: #ffffff; color: #1f2937; }
 
     /* ============================= Anurag: NAVBAR,OFFCANVAS ============================= */
 
@@ -74,5 +95,58 @@ footer .text-secondary { color: var(--muted) !important; }
 .message-bubble.user { background: #ffe5e5; color:#111; }
 .message-bubble.bot  { background: #f3f4f6; color:#111; }
 @media (max-width: 576px){ .message-bubble{ max-width: 95%; } }
+
+/* ============================= Isha: HERO & CAROUSEL STYLES ============================= */
+
+#hero .carousel,
+#hero .carousel-inner {
+  height: var(--hero-height);
+  border-radius: 0 !important;  
+  overflow: hidden;
+  background: transparent;
+}
+
+#hero .carousel-item { height: 100%; }
+
+#hero .carousel-item.p-5 {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+
+#hero .carousel-item.hero-img { padding: 0 !important; }
+
+#hero .carousel-item.hero-img.active,
+#hero .carousel-item.hero-img.carousel-item-next,
+#hero .carousel-item.hero-img.carousel-item-prev {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-item.hero-img {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000;
+  color: #fff;
+}
+
+.carousel-item.hero-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(0,0,0,.55), rgba(0,0,0,.35));
+}
+
+.carousel-item.hero-img > .hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+@media (max-width: 576px) {
+  :root { --hero-height: 340px; }
+}
 
 
