@@ -1,4 +1,21 @@
+/* ============================= ISHA: UTILITY FUNCTIONS ============================= */
 
+(() => {
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+
+  const AUTH_KEY = "auth.user";
+  const setUser = (u) => localStorage.setItem(AUTH_KEY, JSON.stringify(u));
+  const getUser = () => { try { return JSON.parse(localStorage.getItem(AUTH_KEY) || "null"); } catch { return null; } };
+  const clearUser = () => localStorage.removeItem(AUTH_KEY);
+  const logout = (redirect = "login.html") => { clearUser(); window.location.href = redirect; };
+
+  const displayFromEmail = (email) => {
+    const local = (email || "").split("@")[0];
+    if (!local) return "Account";
+    const parts = local.split(/[._-]+/).filter(Boolean);
+    return parts.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(" ") || "Account";
+  };
 
   /* ============================= ANURAG: AUTHENTICATION UI RENDER ============================= */
 
@@ -46,3 +63,112 @@
       }
     });
   };
+  
+
+  /* ============================= DEEPA: LOGIN FORM LOGIC & LOGOUT BINDINGS ============================= */
+
+    const loginForm = $('#loginForm');
+    if (loginForm) {
+      const email = $('#email');
+      const pwd = $('#password');
+      const loginBtn = $('#loginBtn');
+      const spinner = loginBtn?.querySelector('.spinner-border');
+      const btnText = loginBtn?.querySelector('.btn-text');
+      const loginToastEl = $('#loginToast');
+      const loginToast = loginToastEl ? new bootstrap.Toast(loginToastEl, { delay: 1200 }) : null;
+      const loginAlert = $('#loginAlert');
+      const togglePwd = $('#togglePwd');
+      const pwdStrength = $('#pwdStrength');
+
+      const isNEUEmail = (value) => /^[A-Za-z0-9._%+-]+@northeastern\.edu$/i.test((value || "").trim());
+      const setNEUEmailValidity = () => {
+        if (!email.value) { email.setCustomValidity(""); return; } 
+        if (isNEUEmail(email.value)) {
+          email.setCustomValidity("");
+          email.classList.remove("is-invalid");
+        } else {
+          email.setCustomValidity("Use your @northeastern.edu email address.");
+        }
+      };
+      email?.addEventListener("input", setNEUEmailValidity);
+      setNEUEmailValidity();
+
+      togglePwd?.addEventListener('click', () => {
+        const isPwd = pwd.type === 'password';
+        pwd.type = isPwd ? 'text' : 'password';
+        togglePwd.innerHTML = isPwd ? '<i class="bi bi-eye-slash"></i>' : '<i class="bi bi-eye"></i>';
+      });
+
+      const evaluatePwd = (val) => {
+        let score = 0;
+        if (val.length >= 8) score += 25;
+        if (/[a-z]/.test(val)) score += 25;
+        if (/[A-Z]/.test(val)) score += 25;
+        if (/[0-9]/.test(val)) score += 25;
+        return score;
+      };
+      pwd?.addEventListener('input', () => {
+        const v = pwd.value || '';
+        const s = evaluatePwd(v);
+        if (pwdStrength) {
+          pwdStrength.style.width = s + '%';
+          pwdStrength.classList.toggle('bg-danger', s < 50);
+          pwdStrength.classList.toggle('bg-warning', s >= 50 && s < 75);
+          pwdStrength.classList.toggle('bg-success', s >= 75);
+        }
+      });
+
+      const validPwd = (val) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(val);
+
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        setNEUEmailValidity(); 
+        const emailOk = email.checkValidity();
+        const pwdOk = validPwd(pwd.value);
+
+        if (!emailOk || !pwdOk) {
+          e.stopPropagation();
+          pwd.classList.toggle('is-invalid', !pwdOk);
+          loginAlert?.classList.remove('d-none');
+          loginAlert.textContent = !emailOk
+            ? 'Use your @northeastern.edu email address.'
+            : 'Please fix the errors and try again.';
+          return;
+        }
+
+        const user = {
+          email: email.value.trim(),
+          displayName: displayFromEmail(email.value.trim()),
+          loggedInAt: new Date().toISOString()
+        };
+        setUser(user);
+
+        if (loginToastEl) {
+          loginToastEl.querySelector('.toast-body').textContent = `Welcome, ${user.displayName}! Redirecting…`;
+        }
+        loginAlert?.classList.add('d-none');
+        spinner?.classList.remove('d-none');
+        btnText?.classList.add('d-none');
+        loginBtn?.setAttribute('disabled', 'true');
+        loginToast?.show();
+
+        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+      });
+    }
+
+    const bindLogout = () => {
+      const selectors = ['#logoutBtn', '.logout-btn', '[data-logout]', 'a[href="#logout"]'];
+      selectors.forEach(sel => {
+        $$(sel).forEach(el => {
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            logout('login.html'); 
+          });
+        });
+      });
+    };
+    bindLogout();
+
+    renderAuthUI();
+  });
+})();
