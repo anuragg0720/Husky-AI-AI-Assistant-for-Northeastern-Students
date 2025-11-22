@@ -63,6 +63,50 @@
       }
     });
   };
+
+/* ============================= ANANYA: DOM CONTENT LOADED & FORM BINDINGS ============================= */
+
+  document.addEventListener('DOMContentLoaded', () => {
+    $$('.brand').forEach(el => (el.textContent = 'HUSKY AI'));
+    const year = $('#year'); if (year) year.textContent = new Date().getFullYear();
+
+    $$( '[data-bs-toggle="tooltip"]' ).forEach(el => new bootstrap.Tooltip(el));
+
+    const globalToastEl = $('#globalToast');
+    if (globalToastEl) window.globalToast = new bootstrap.Toast(globalToastEl, { delay: 2000 });
+
+    const newsletterForm = $('#newsletterForm');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!newsletterForm.checkValidity()) {
+          e.stopPropagation();
+        } else {
+          $('#globalToast .toast-body').textContent = 'Subscribed! Check your inbox.';
+          window.globalToast?.show();
+          newsletterForm.reset();
+          newsletterForm.classList.remove('was-validated');
+        }
+        newsletterForm.classList.add('was-validated');
+      });
+    }
+
+    const demoForm = $('#demoForm');
+    if (demoForm) {
+      demoForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!demoForm.checkValidity()) {
+          e.stopPropagation();
+        } else {
+          $('#globalToast .toast-body').textContent = 'Thanks! We will email you shortly.';
+          window.globalToast?.show();
+          bootstrap.Modal.getInstance($('#demoModal'))?.hide();
+          demoForm.reset();
+          demoForm.classList.remove('was-validated');
+        }
+        demoForm.classList.add('was-validated');
+      });
+    }
   
 
   /* ============================= DEEPA: LOGIN FORM LOGIC & LOGOUT BINDINGS ============================= */
@@ -171,4 +215,4 @@
 
     renderAuthUI();
   });
-})();
+  })();

@@ -96,3 +96,70 @@
        
   </body>
 </html>
+
+<!-- ====================== Ananya: FOOTER + MODALS + TOAST + SCRIPTS ====================== -->
+
+    <footer class="login-footer py-4">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="text-secondary">© <span id="year"></span> BrandName. All rights reserved.</div>
+        <div class="d-flex gap-2">
+          <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle" aria-label="Twitter">
+            <i class="bi bi-twitter-x"></i>
+          </a>
+          <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle" aria-label="GitHub">
+            <i class="bi bi-github"></i>
+          </a>
+          <a href="#" class="btn btn-outline-secondary btn-sm rounded-circle" aria-label="LinkedIn">
+            <i class="bi bi-linkedin"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <div class="modal fade" id="resetModal" tabindex="-1" aria-labelledby="resetModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="resetModalLabel">Reset password</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="resetForm" class="row g-3 needs-validation" novalidate>
+              <div class="col-12">
+                <label for="resetEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="resetEmail" required />
+                <div class="invalid-feedback">Please enter your account email.</div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary" type="submit">Send reset link</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="loginToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">Login successful (demo). Redirecting…</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+      // Fill footer year
+      document.addEventListener('DOMContentLoaded', () => {
+        const y = document.getElementById('year');
+        if (y) y.textContent = new Date().getFullYear();
+      });
+    </script>
+  </body>
+</html>
+
